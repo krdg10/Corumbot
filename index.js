@@ -32,6 +32,8 @@ function BotInit() {
 			}
 
 			Bot.post('statuses/retweet/:id', id, BotRetweeted);
+			Bot.post('favorites/create', id, BotFavorited);
+			Bot.post('friendships/create', data.statuses[0].user, BotFollowed);
 			
 			function BotRetweeted(error, response) {
 				if (error) {
@@ -39,6 +41,22 @@ function BotInit() {
 				}
 				else {
 					console.log('Bot retweetou : ' + id.id);
+				}
+			}
+			function BotFavorited(error, response) {
+				if (error) {
+					console.log('Bot não pode favoritar, : ' + error);
+				}
+				else {
+					console.log('Bot favoritou : ' + id.id);
+				}
+			}
+			function BotFollowed(error, response) {
+				if (error) {
+					console.log('Bot não pode seguir, : ' + error);
+				}
+				else {
+					console.log('Bot seguiu : ' + id.id);
 				}
 			}
 		}
